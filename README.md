@@ -1,8 +1,8 @@
 # runcmds, The command list executor
 
-_runcmds_ is a simple script to **sequentially** run a list of commands. This list can be define via script arguments or dedicated file.
+_runcmds_ is a simple script to sequentially run a list of commands. This list can be define via script arguments or dedicated file.
 
-Moreover, _runcmds_ stops from the first command execution fail, by printing the number of the failing command. In addition, _runcmds_ lets you begin the list of commands at any index.
+Moreover, _runcmds_ stops from the first command execution failure, by printing the number of the failing command. In addition, _runcmds_ lets you begin the list of commands at any index.
 This could be useful to re-start a failing execution flow to the failed index.
 
 ## How to use it
