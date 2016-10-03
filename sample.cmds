@@ -1,0 +1,8 @@
+# List of commands used to release this project.
+#
+# Variable subtitution can be written by using the following format: ${variable},
+# where variable is the variable name.
+#
+# Can be ran with the runcmds.sh command list executor script.
+
+echo ${you}
