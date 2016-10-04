@@ -160,7 +160,7 @@ function runCommands {
 
         # Execute command
         log INFO "----- #${functionalIndex}: $command"
-        $command
+        eval "$command"
 
         # Check exit status
         if [ $? -ne 0 ]; then
