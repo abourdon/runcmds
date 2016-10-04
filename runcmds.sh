@@ -67,7 +67,7 @@ function help {
     log INFO '                                              Once defined, environment variable can be used from command to execute as the following: ${ENV_KEY}.'
     log INFO '                                              For instance, the command "echo ${foo}" will be interpreted as "echo bar" by using the option "-e foo bar", or "--environment foo bar".'
     log INFO 'COMMAND_1 COMMAND_2 ...:'
-    log INFO '      Command list to execute. If exists, then the -s | --source option is disabled.'
+    log INFO '      Command list to execute in order. If exists, then the -s | --source option is disabled.'
     exit 1
 }
 
@@ -142,7 +142,7 @@ function runCommands {
         exit
     fi
 
-    log INFO 'Starting commands execution...'
+    log INFO 'Starting command execution flow...'
     indexToEnd=`expr $commandsLength - 1`
     for index in `seq $indexToStart $indexToEnd`; do
         functionalIndex=`expr $index + 1`
@@ -169,7 +169,7 @@ function runCommands {
             exit 1
         fi
     done
-    log INFO 'Commands execution done.'
+    log INFO 'Command execution flow done.'
 }
 
 # Main entry point
