@@ -152,8 +152,14 @@ function runCommands {
         environmentLength=${#environment[@]}
         if [ ! $environmentLength -eq 0 ]; then
             for environmentIndex in `seq 0 2 $(expr ${environmentLength} - 1)`; do
+                # Get environemnt key and value
                 environmentKey=${environment[$environmentIndex]}
                 environmentValue=${environment[$environmentIndex+1]}
+
+                # Sanitize environment value to be used by sed
+                environmentValue=`echo $environmentValue | sed -e 's/[\/&]/\\\&/g'`
+
+                # Parse command line by substituting environment key and value if any
                 command=`echo "$command" | sed "s/\\${${environmentKey}}/${environmentValue}/g"`
             done;
         fi
