@@ -149,11 +149,14 @@ function runCommands {
         command="${commands[$index]}"
 
         # Parse environment variables
-        for environmentIndex in `seq 0 2 $(expr ${#environment[@]} - 1)`; do
-            environmentKey=${environment[$environmentIndex]}
-            environmentValue=${environment[$environmentIndex+1]}
-            command=`echo "$command" | sed "s/\\${${environmentKey}}/${environmentValue}/g"`
-        done;
+        environmentLength=${#environment[@]}
+        if [ ! $environmentLength -eq 0 ]; then
+            for environmentIndex in `seq 0 2 $(expr ${environmentLength} - 1)`; do
+                environmentKey=${environment[$environmentIndex]}
+                environmentValue=${environment[$environmentIndex+1]}
+                command=`echo "$command" | sed "s/\\${${environmentKey}}/${environmentValue}/g"`
+            done;
+        fi
 
         # Execute command
         log INFO "----- #${functionalIndex}: $command"
