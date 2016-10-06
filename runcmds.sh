@@ -25,6 +25,9 @@ functionalIndexToStart=1
 # Source file
 commandsFile=''
 
+# Dry run
+dryRun='false'
+
 #################################################
 # Internal variables                            #
 #################################################
@@ -66,6 +69,8 @@ function help {
     log INFO '      -e | --environment ENV_KEY ENV_VALUE    Set the environment key variable ENV_KEY to the value ENV_VALUE.'
     log INFO '                                              Once defined, environment variable can be used from command to execute as the following: ${ENV_KEY}.'
     log INFO '                                              For instance, the command "echo ${foo}" will be interpreted as "echo bar" by using the option "-e foo bar", or "--environment foo bar".'
+    log INFO '      -d | --dry-run                          List all commands which will be executed by interpreting environment variable.'
+    log INFO '                                              Useful to see commands before to really execute them.'
     log INFO 'COMMAND_1 COMMAND_2 ...:'
     log INFO '      Command list to execute in order. If exists, then the -s | --source option is disabled.'
     exit 1
@@ -106,6 +111,9 @@ function parseOptions {
                 shift
                 shift
                 ;;
+            -d|--dry-run)
+                dryRun='true'
+                ;;
             *)
                 commands+=("$argument")
                 ;;
@@ -142,7 +150,12 @@ function runCommands {
         exit
     fi
 
-    log INFO 'Starting command execution flow...'
+    startingMessage='Starting command execution flow'
+    if [ $dryRun = 'true' ]; then
+        startingMessage="$startingMessage in dry run mode..."
+    fi
+    log INFO "$startingMessage";
+
     indexToEnd=`expr $commandsLength - 1`
     for index in `seq $indexToStart $indexToEnd`; do
         functionalIndex=`expr $index + 1`
@@ -166,7 +179,9 @@ function runCommands {
 
         # Execute command
         log INFO "----- #${functionalIndex}: $command"
-        eval "$command"
+        if [ $dryRun != 'true' ]; then
+            eval "$command"
+        fi
 
         # Check exit status
         if [ $? -ne 0 ]; then
