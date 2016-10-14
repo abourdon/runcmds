@@ -59,20 +59,20 @@ function log {
 # @param nothing
 # @return nothing
 function help {
-    log INFO "${APP}: Execute a list of commands"
-    log INFO "usage: ${APP} [OPTIONS] [COMMAND_1 COMMAND_2 ...]"
-    log INFO 'OPTIONS:'
-    log INFO '      -f | --from INDEX                       From which command number (INDEX) to start. Start from 1.'
-    log INFO '      -h | --help                             Display this helper message.'
-    log INFO '      -s | --source PATH                      The file PATH that list commands to execute.'
-    log INFO '                                              File format: one line by command. Empty line or line starting by the "#" character will be ignored.'
-    log INFO '      -e | --environment ENV_KEY ENV_VALUE    Set the environment key variable ENV_KEY to the value ENV_VALUE.'
-    log INFO '                                              Once defined, environment variable can be used from command to execute as the following: ${ENV_KEY}.'
-    log INFO '                                              For instance, the command "echo ${foo}" will be interpreted as "echo bar" by using the option "-e foo bar", or "--environment foo bar".'
-    log INFO '      -d | --dry-run                          List all commands which will be executed by interpreting environment variable.'
-    log INFO '                                              Useful to see commands before to really execute them.'
-    log INFO 'COMMAND_1 COMMAND_2 ...:'
-    log INFO '      Command list to execute in order. If exists, then the -s | --source option is disabled.'
+    echo "${APP}: Execute a list of commands"
+    echo "usage: ${APP} [OPTIONS] [COMMAND_1 COMMAND_2 ...]"
+    echo 'OPTIONS:'
+    echo '      -f | --from INDEX                       From which command number (INDEX) to start. Start from 1.'
+    echo '      -h | --help                             Display this helper message.'
+    echo '      -s | --source PATH                      The file PATH that list commands to execute.'
+    echo '                                              File format: one line by command. Empty line or line starting by the "#" character will be ignored.'
+    echo '      -e | --environment ENV_KEY ENV_VALUE    Set the environment key variable ENV_KEY to the value ENV_VALUE.'
+    echo '                                              Once defined, environment variable can be used from command to execute as the following: ${ENV_KEY}.'
+    echo '                                              For instance, the command "echo ${foo}" will be interpreted as "echo bar" by using the option "-e foo bar", or "--environment foo bar".'
+    echo '      -d | --dry-run                          List all commands which will be executed by interpreting environment variable.'
+    echo '                                              Useful to see commands before to really execute them.'
+    echo 'COMMAND_1 COMMAND_2 ...:'
+    echo '      Command list to execute in order. If exists, then the -s | --source option is disabled.'
     exit 1
 }
 
