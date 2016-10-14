@@ -143,10 +143,10 @@ function runCommands {
     commandsLength=${#commands[@]}
 
     if [ $commandsLength -eq 0 ]; then
-        log INFO 'Nothing to execute.'
+        log INFO 'Nothing to execute. You can use the -h or --help option to display help message.'
         exit
     elif [ $indexToStart -ge $commandsLength ]; then
-        log ERROR "Index to start > commands length"
+        log ERROR 'Index to start > commands length. Exiting.'
         exit
     fi
 
