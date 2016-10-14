@@ -60,19 +60,19 @@ function log {
 # @return nothing
 function help {
     echo "${APP}: Execute a list of commands"
-    echo "usage: ${APP} [OPTIONS] [COMMAND_1 COMMAND_2 ...]"
+    echo "Usage: ${APP} [OPTIONS] [COMMAND_1 COMMAND_2 ...]"
     echo 'OPTIONS:'
     echo '      -f | --from INDEX                       From which command number (INDEX) to start. Start from 1.'
     echo '      -h | --help                             Display this helper message.'
-    echo '      -s | --source PATH                      The file PATH that list commands to execute.'
-    echo '                                              File format: one line by command. Empty line or line starting by the "#" character will be ignored.'
-    echo '      -e | --environment ENV_KEY ENV_VALUE    Set the environment key variable ENV_KEY to the value ENV_VALUE.'
-    echo '                                              Once defined, environment variable can be used from command to execute as the following: ${ENV_KEY}.'
+    echo '      -s | --source PATH                      The file PATH from which getting list of commands to execute.'
+    echo '                                              File format: One line = One command. Empty line or line starting by the "#" character will be ignored.'
+    echo '      -e | --environment ENV_KEY ENV_VALUE    Set the environment key variable ENV_KEY to the value ENV_VALUE within a command.'
+    echo '                                              Once defined, environment variable can be used from command as the following: ${ENV_KEY}.'
     echo '                                              For instance, the command "echo ${foo}" will be interpreted as "echo bar" by using the option "-e foo bar", or "--environment foo bar".'
-    echo '      -d | --dry-run                          List all commands which will be executed by interpreting environment variable.'
-    echo '                                              Useful to see commands before to really execute them.'
+    echo '      -d | --dry-run                          List all commands which will be executed by interpreting environment variable if necessary.'
+    echo '                                              Useful to see commands before really execute them.'
     echo 'COMMAND_1 COMMAND_2 ...:'
-    echo '      Command list to execute in order. If exists, then the -s | --source option is disabled.'
+    echo '      List of commands to execute in order. If exists, then the -s | --source option will be disabled.'
     exit 1
 }
 
