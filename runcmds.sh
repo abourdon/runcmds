@@ -73,7 +73,7 @@ function help {
     echo '                                              Useful to see commands before really execute them.'
     echo 'COMMAND_1 COMMAND_2 ...:'
     echo '      List of commands to execute in order. If exists, then the -s | --source option will be disabled.'
-    exit 1
+    exit 0
 }
 
 # Parse user-given options
@@ -91,7 +91,7 @@ function parseOptions {
                 value="$2"
                 if [[ $value -le 0 ]]; then
                     log ERROR 'Bad start index value. Value has to be greater or equal to 1.'
-                    exit
+                    exit 1
                 fi
                 functionalIndexToStart=$value
                 shift
@@ -100,7 +100,7 @@ function parseOptions {
                 value="$2"
                 if [ ! -r $value ]; then
                     log ERROR "Unable to parse commands file '$value'. Exiting."
-                    exit
+                    exit 1
                 fi
                 commandsFile=$value
                 shift
@@ -144,10 +144,10 @@ function runCommands {
 
     if [ $commandsLength -eq 0 ]; then
         log INFO 'Nothing to execute. You can use the -h or --help option to display help message.'
-        exit
+        exit 0
     elif [ $indexToStart -ge $commandsLength ]; then
         log ERROR 'Index to start > commands length. Exiting.'
-        exit
+        exit 1
     fi
 
     startingMessage='Starting command execution flow'
@@ -186,7 +186,7 @@ function runCommands {
         # Check exit status
         if [ $? -ne 0 ]; then
             log ERROR "Command #${functionalIndex} failed"
-            log ERROR "Please fix it and rerun by executing: ${APP} --from ${functionalIndex}"
+            log ERROR "Please fix it and rerun by executing: ${APP} [...] --from ${functionalIndex}"
             exit 1
         fi
     done
